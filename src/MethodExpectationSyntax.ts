@@ -7,14 +7,19 @@ export default class MethodExpectationSyntax {
     ) {
     }
 
-    public wasCalledTimes(times: number): boolean {
+    public amountOfCalls(): number {
         const map = this.callMap.get(this.methodName);
 
         if (!map) {
-            return times === 0;
+            return 0;
         }
 
-        return map.getCalls().length === times;
+        return map.getCalls().length;
+
+    }
+
+    public wasCalledTimes(times: number): boolean {
+        return this.amountOfCalls() === times;
     }
 
     public wasCalledWith(expectedArguments: any[] | any, callIndex: number = 0) {
